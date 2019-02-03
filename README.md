@@ -1,24 +1,39 @@
-# README
+Simon Tharby's solution to [Project 2: Micro-Reddit](https://www.theodinproject.com/courses/ruby-on-rails/lessons/building-with-active-record-ruby-on-rails?ref=lnav), The Odin Project, Ruby on Rails unit, Active Record basics section.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Instructions (summary): To build and test (validate) models for a micro-reddit style app, including User, Post and Comment models and the appropriate associations between them.
 
-Things you may want to cover:
+Note: I chose to also create tests for the models (see below).
 
-* Ruby version
+Terminal output when following last section of instructions:
 
-* System dependencies
+![console.png](app/assets/images/console.png)
 
-* Configuration
+## Generating Models:
 
-* Database creation
+N.B. Use <code><model>:references</code> in <code>rials generate model...</code> to create correct foreign key id references. For example; <code>rails generate model Comment body:text user:references post:references</code>
 
-* Database initialization
+Records in users table after creation of 2 users (using sqlitebrowser to view):
 
-* How to run the test suite
+![users.png](app/assets/images/users.png)
 
-* Services (job queues, cache servers, search engines, etc.)
+Records in posts table after creation of 2 posts (using sqlitebrowser to view):
 
-* Deployment instructions
+![posts.png](app/assets/images/posts.png)
 
-* ...
+Records in comments table after creation of 2 users (using sqlitebrowser to view):
+
+![comments.png](app/assets/images/comments.png)
+
+## Tests:
+
+N.B. Use reference to valid fixture(s) in tests of models that 'belong_to' other models. For example;
+```text
+def setup
+  @user = users(:jinja)
+  @post = Post.new(title: "Test Post Title", body: "Test post body text.", user_id: @user.id)
+end
+```
+
+Output of <code>rails test</code>:
+
+![tests.png](app/assets/images/tests.png)
